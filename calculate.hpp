@@ -11,9 +11,7 @@
 #include <stack>
 #include <string>
 
-namespace CALCULATE {
-
-	class Calculate {
+class Calculate {
 	private:
 		std::string suffix;            //后缀表达式
 		std::string operand;           //显示在屏幕上的数
@@ -37,8 +35,6 @@ namespace CALCULATE {
 		std::string getOperand() const;
 		//设置当前数字缓存区内容
 		void setOperand(std::string s);
-	};
-
-}
+};
 
 #endif /* INC_CALCULATE_HPP_ */

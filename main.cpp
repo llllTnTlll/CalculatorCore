@@ -4,7 +4,7 @@
 int main()
 {
     using namespace std;
-    CALCULATE::Calculate Calcu;
+    Calculate Calcu;
     Calcu.getInput('2');
     Calcu.getInput('*');
     Calcu.getInput('(');
