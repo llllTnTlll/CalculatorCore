@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Calculator.cpp" />
-    <ClCompile Include="ops.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="calculate.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ops.h" />
+    <ClInclude Include="calculate.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
