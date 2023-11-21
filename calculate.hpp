@@ -34,13 +34,9 @@ namespace CALCULATE {
 		//获取输入内容
 		void getInput(char opt);
 		//获取当前数字缓存区内容
-		inline std::string getOperand() const {
-			return operand;
-		}
+		std::string getOperand() const;
 		//设置当前数字缓存区内容
-		inline void setOperand(std::string s) {
-			operand = s;
-		}
+		void setOperand(std::string s);
 	};
 
 }

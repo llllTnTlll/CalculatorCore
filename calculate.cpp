@@ -171,4 +171,13 @@ namespace CALCULATE {
 		}
 	}
 
+	std::string Calculate::getOperand() const {
+		std::string o = operand;
+		return o;
+	}
+
+	void Calculate::setOperand(std::string s) {
+		operand = s;
+	}
+
 }
