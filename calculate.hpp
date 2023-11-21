@@ -10,6 +10,7 @@
 
 #include <stack>
 #include <string>
+#include <cstdio>
 
 class Calculate {
 	private:
@@ -17,14 +18,14 @@ class Calculate {
 		std::string operand;           //显示在屏幕上的数
 
 		std::stack<char> optStack;
-		std::stack<double> numStack;
+		std::stack<float> numStack;
 
 		void addToSuffix(char& c);
 		void addToSuffix(std::string& str);
 
-		double getNumStackValue();
+		float getNumStackValue();
 		void clrStack();
-		bool isNumber(std::string& str);
+		bool isNumber(const std::string& str);
 
 		int getLevel(char& opt) const;
 		bool doCalcu();

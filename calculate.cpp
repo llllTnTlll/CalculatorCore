@@ -22,8 +22,8 @@ void Calculate::addToSuffix(std::string& str) {
 	}
 }
 
-double Calculate::getNumStackValue() {
-	double n = numStack.top();
+float Calculate::getNumStackValue() {
+	float n = numStack.top();
 	numStack.pop();
 	return n;
 }
@@ -35,13 +35,33 @@ void Calculate::clrStack() {
 		numStack.pop();
 }
 
-bool Calculate::isNumber(std::string& str) {
-	for (char c : str) {
-		if (!std::isdigit(c)) {
-			return false;
+bool Calculate::isNumber(const std::string& str) {
+	// 空字符串不是数字
+	if (str.empty()) {
+		return false;
+	}
+
+	// 允许字符串以'-'或'+'开始
+	size_t start = 0;
+	if (str[0] == '-' || str[0] == '+') {
+		start = 1;
+	}
+
+	bool hasDigit = false; // 用于标记是否已经遇到过数字
+	bool hasDot = false;   // 用于标记是否已经遇到过小数点
+
+	for (size_t i = start; i < str.size(); ++i) {
+		if (std::isdigit(str[i])) {
+			hasDigit = true;
+		}
+		else if (str[i] == '.' && !hasDot) {
+			hasDot = true;
+		}
+		else {
+			return false; // 遇到不是数字或重复的小数点，返回false
 		}
 	}
-	return true;
+	return hasDigit; // 至少包含一个数字才是有效数字
 }
 
 int Calculate::getLevel(char& opt) const {
@@ -68,15 +88,15 @@ bool Calculate::doCalcu() {
 	while (spacePos != std::string::npos) {
 		std::string word = suffix.substr(startPos, spacePos - startPos);
 		if (isNumber(word)) {
-			numStack.push(std::stod(word));
+			numStack.push(std::stof(word));
 		}
 		else {
 			char opt = word[0];
 			switch (opt) {
 			case '+': {
 				if (numStack.size() >= 2) {
-					double n2 = getNumStackValue();
-					double n1 = getNumStackValue();
+					float n2 = getNumStackValue();
+					float n1 = getNumStackValue();
 					numStack.push(n1 + n2);
 				}
 				else {
@@ -86,8 +106,8 @@ bool Calculate::doCalcu() {
 			}
 			case '-': {
 				if (numStack.size() >= 2) {
-					double n2 = getNumStackValue();
-					double n1 = getNumStackValue();
+					float n2 = getNumStackValue();
+					float n1 = getNumStackValue();
 					numStack.push(n1 - n2);
 				}
 				else {
@@ -97,8 +117,8 @@ bool Calculate::doCalcu() {
 			}
 			case '*': {
 				if (numStack.size() >= 2) {
-					double n2 = getNumStackValue();
-					double n1 = getNumStackValue();
+					float n2 = getNumStackValue();
+					float n1 = getNumStackValue();
 					numStack.push(n1 * n2);
 				}
 				else {
@@ -108,8 +128,8 @@ bool Calculate::doCalcu() {
 			}
 			case '/': {
 				if (numStack.size() >= 2) {
-					double n2 = getNumStackValue();
-					double n1 = getNumStackValue();
+					float n2 = getNumStackValue();
+					float n1 = getNumStackValue();
 					numStack.push(n1 / n2);
 				}
 				else {
@@ -132,7 +152,7 @@ bool Calculate::doCalcu() {
 
 void Calculate::getInput(char opt) {
 	//若输入字符是未完成的状态将其写入数字缓存区
-	if (std::isdigit(opt)) {
+	if (std::isdigit(opt) || opt == '.') {
 		operand += opt;
 	}
 	else {
